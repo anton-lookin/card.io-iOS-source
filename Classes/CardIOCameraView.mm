@@ -19,7 +19,6 @@
 #import "CardIOShutterView.h"
 #import "CardIOStyles.h"
 #import "CardIOVideoFrame.h"
-#import "CardIOVideoStream.h"
 #import "CardIOLocalizer.h"
 
 #define kLogoAlpha 0.6f
@@ -37,7 +36,6 @@
 @property(nonatomic, strong, readonly) CardIOGuideLayer *cardGuide;
 @property(nonatomic, strong, readwrite) UILabel *guideLayerLabel;
 @property(nonatomic, strong, readwrite) CardIOShutterView *shutter;
-@property(nonatomic, strong, readwrite) CardIOVideoStream *videoStream;
 @property(nonatomic, strong, readwrite) UIButton *lightButton;
 @property(nonatomic, strong, readwrite) UIImageView *logoView;
 @property(nonatomic, assign, readwrite) UIDeviceOrientation deviceOrientation;
@@ -123,7 +121,7 @@
     [self addSubview:self.guideLayerLabel];
 
     // Shutter view for shutter-open animation
-    _shutter = [[CardIOShutterView alloc] initWithFrame:CGRectZero];
+    _shutter = [[CardIOShutterView alloc] initWithFrame:CGRectZero backgroundColor:config.shutterColor];
     [self.shutter setOpen:NO animated:NO duration:0];
     [self addSubview:self.shutter];
 
@@ -134,12 +132,12 @@
     }
 
     // Set up the light button
-    if([self.videoStream hasTorch] && ![self.videoStream canSetTorchLevel]) {
-      _lightButton = [CardIOResource lightButton];
-      self.lightButton.accessibilityLabel = CardIOLocalizedString(@"activate_flash", config.languageOrLocale); // Turn flash on.
-      [self.lightButton addTarget:self action:@selector(toggleTorch:) forControlEvents:UIControlEventTouchUpInside];
-      [self addSubview:self.lightButton];
-    }
+//    if([self.videoStream hasTorch] && ![self.videoStream canSetTorchLevel]) {
+//      _lightButton = [CardIOResource lightButton];
+//      self.lightButton.accessibilityLabel = CardIOLocalizedString(@"activate_flash", config.languageOrLocale); // Turn flash on.
+//      [self.lightButton addTarget:self action:@selector(toggleTorch:) forControlEvents:UIControlEventTouchUpInside];
+//      [self addSubview:self.lightButton];
+//    }
 
     // Set up logo
     NSString *logoImageName = config.useCardIOLogo ? @"card_io_logo.png" : @"paypal_logo.png";
@@ -238,6 +236,7 @@
     [self updateLightButtonState];
   }
 }
+
 
 - (void)updateLightButtonState {
   if (self.lightButton) {
@@ -468,7 +467,7 @@
   [self.guideLayerLabel sizeToFit];
 
   CGRect cameraPreviewFrame = [self cameraPreviewFrame];
-  self.guideLayerLabel.center = CGPointMake(CGRectGetMidX(cameraPreviewFrame), CGRectGetMidY(cameraPreviewFrame));
+  self.guideLayerLabel.center = CGPointMake(CGRectGetMidX(self.guideFrame), CGRectGetMidY(self.guideFrame));
   
   internalGuideRect.size.height = 9999.9f;
   CGRect textRect = [self.guideLayerLabel textRectForBounds:internalGuideRect limitedToNumberOfLines:0];

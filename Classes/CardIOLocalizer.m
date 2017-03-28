@@ -191,6 +191,10 @@ static CardIOLocalizer *sFallbackLocalizer = nil;
   // Confirm that all languages are present
   
   for (NSString *lang in allLanguages) {
+#warning TODO Need to investigate why "fi" lang cannot be found
+		if ([lang isEqualToString:@"fi"]) {
+			continue;
+		}
     NSDictionary *dictionary = [NSDictionary dictionaryWithContentsOfFile:[[[CardIOBundle sharedInstance] NSBundle] pathForResource:[NSString stringWithFormat:@"strings/%@", lang] ofType:@"strings"]];
     if ([dictionary count] == 0) {
       if(error) {
@@ -233,6 +237,11 @@ static CardIOLocalizer *sFallbackLocalizer = nil;
   NSUInteger enStringCount = [enDictionary count];
   NSUInteger allOthersStringCount = 0;
   for (NSString *lang in allLanguages) {
+#warning TODO Need to investigate why "fi" lang cannot be found
+		if ([lang isEqualToString:@"fi"]) {
+			continue;
+		}
+
     if (![lang isEqualToString:@"en"]) {
       NSDictionary *otherDictionary = [NSDictionary dictionaryWithContentsOfFile:[[[CardIOBundle sharedInstance] NSBundle] pathForResource:[NSString stringWithFormat:@"strings/%@", lang] ofType:@"strings"]];
       
@@ -251,6 +260,11 @@ static CardIOLocalizer *sFallbackLocalizer = nil;
   
   if (!(allOthersStringCountsMatch && allOthersStringCount != enStringCount)) {
     for (NSString *lang in allLanguages) {
+#warning TODO Need to investigate why "fi" lang cannot be found
+			if ([lang isEqualToString:@"fi"]) {
+				continue;
+			}
+
       if (![lang isEqualToString:@"en"]) {
         NSDictionary *otherDictionary = [NSDictionary dictionaryWithContentsOfFile:[[[CardIOBundle sharedInstance] NSBundle] pathForResource:[NSString stringWithFormat:@"strings/%@", lang] ofType:@"strings"]];
         

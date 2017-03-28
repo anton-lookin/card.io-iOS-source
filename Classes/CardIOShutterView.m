@@ -11,6 +11,8 @@
 
 @interface ShutterLayer : CALayer
 
++ (instancetype)layerWithBackgroundColor:(UIColor*)backgroundColor;
+
 - (void)rotateToAngle:(CGFloat)angle;
 
 @property(nonatomic, assign, readwrite) CGFloat openAngle;
@@ -51,24 +53,30 @@
 
 @implementation CardIOShutterView
 
-- (id)initWithFrame:(CGRect)aFrame {
+- (id)initWithFrame:(CGRect)aFrame backgroundColor:(UIColor*)backgroundColor {
   if((self = [super initWithFrame:aFrame])) {
     self.layer.masksToBounds = YES;
 
-    _bottom = [ShutterLayer layer];
-    _bottom.anchorPoint = CGPointMake(1, 1); // bottom right
-    [self.layer addSublayer:_bottom];
-
-    _right = [ShutterLayer layer];
-    _right.anchorPoint = CGPointMake(1, 0); // top right
-    [self.layer addSublayer:_right];
-
-    _top = [ShutterLayer layer];
-    _top.anchorPoint = CGPointMake(0, 0); // top left
-    [self.layer addSublayer:_top];
-    
-    _left = [ShutterLayer layer];
-    _left.anchorPoint = CGPointMake(0, 1); // bottom left
+		_bottom = [ShutterLayer layer];
+		_right = [ShutterLayer layer];
+		_top = [ShutterLayer layer];
+		_left = [ShutterLayer layer];
+		
+		_bottom.anchorPoint = CGPointMake(1, 1); // bottom right
+		_right.anchorPoint = CGPointMake(1, 0); // top right
+		_top.anchorPoint = CGPointMake(0, 0); // top left
+		_left.anchorPoint = CGPointMake(0, 1); // bottom left
+		
+		if (backgroundColor) {
+			_bottom.backgroundColor = backgroundColor.CGColor;
+			_right.backgroundColor = backgroundColor.CGColor;
+			_top.backgroundColor = backgroundColor.CGColor;
+			_left.backgroundColor = backgroundColor.CGColor;
+		}
+		
+		[self.layer addSublayer:_bottom];
+		[self.layer addSublayer:_right];
+		[self.layer addSublayer:_top];
     [self.layer addSublayer:_left];
 
     [self updateTransforms];

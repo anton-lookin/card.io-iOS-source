@@ -14,12 +14,12 @@
 
 // Enable debugging for the DMZ code
 #ifndef DMZ_DEBUG
-#define DMZ_DEBUG CARDIO_DEBUG
+//#define DMZ_DEBUG CARDIO_DEBUG
 #endif
 
 // Enable debugging for Baler
 #ifndef BALER_DEBUG
-#define BALER_DEBUG CARDIO_DEBUG
+//#define BALER_DEBUG CARDIO_DEBUG
 #endif
 
 // Use the camera if not simulator, or in release mode

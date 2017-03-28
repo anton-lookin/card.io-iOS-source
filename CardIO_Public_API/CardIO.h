@@ -11,4 +11,4 @@
 #import "CardIOPaymentViewController.h"
 #import "CardIOPaymentViewControllerDelegate.h"
 #import "CardIOUtilities.h"
-
+#import "CardIOCameraView.h"

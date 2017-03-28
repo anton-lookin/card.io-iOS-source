@@ -212,7 +212,6 @@
 		92263E2C1B83B937003FE678 /* CardIOCardOverlay.h in Headers */ = {isa = PBXBuildFile; fileRef = 03B21727134652DB00958550 /* CardIOCardOverlay.h */; };
 		92263E2E1B83B99B003FE678 /* modelm_befe75da.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 03ABD1CE15794234004BE637 /* modelm_befe75da.hpp */; };
 		92263E2F1B83B9B0003FE678 /* geometry.h in Headers */ = {isa = PBXBuildFile; fileRef = 0381A82D139982AF0088C26E /* geometry.h */; };
-		92263E301B83B9B5003FE678 /* mz_ios.h in Headers */ = {isa = PBXBuildFile; fileRef = 849799A6159E5EF400527FF5 /* mz_ios.h */; };
 		929AD7811B8CA8FD00F6D18E /* CardIODetectionMode.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E587F8A18C7E165000C1D3A /* CardIODetectionMode.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		929AD7821B8CA8FD00F6D18E /* CardIOUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 3ED8A876197DBDA900069761 /* CardIOUtilities.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A50A54C51BE306DB00B669FB /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ED00DA21BD8D60900FD2DB4 /* UIImage+ImageEffects.m */; };
@@ -268,6 +267,8 @@
 		A553B70D1BE32273006DF551 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E9618E319C8EBCB0023CDBB /* MobileCoreServices.framework */; };
 		A553B7161BE322A1006DF551 /* CardIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92263D701B83ACBB003FE678 /* CardIO.framework */; };
 		A553B7171BE322A1006DF551 /* CardIO.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 92263D701B83ACBB003FE678 /* CardIO.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B47DF6131E699084002EF735 /* CardIOCameraView.h in Headers */ = {isa = PBXBuildFile; fileRef = D13BBFF51460ABE80024691D /* CardIOCameraView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B47DF6141E6990A2002EF735 /* mz_ios.h in Headers */ = {isa = PBXBuildFile; fileRef = 849799A6159E5EF400527FF5 /* mz_ios.h */; };
 		F4A16EC21D8846EA001DC8BE /* fi.strings in Resources */ = {isa = PBXBuildFile; fileRef = F4A16EC11D8846EA001DC8BE /* fi.strings */; };
 /* End PBXBuildFile section */
 
@@ -1795,7 +1796,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
+		29B97314FDCFA39411CA2CEA = {
 			isa = PBXGroup;
 			children = (
 				030735D6134148FE00663C26 /* Public API */,
@@ -2019,11 +2020,12 @@
 				929AD7811B8CA8FD00F6D18E /* CardIODetectionMode.h in Headers */,
 				929AD7821B8CA8FD00F6D18E /* CardIOUtilities.h in Headers */,
 				92263DCE1B83AD65003FE678 /* CardIO.h in Headers */,
-				92263E301B83B9B5003FE678 /* mz_ios.h in Headers */,
 				92263DD21B83AD7B003FE678 /* CardIOPaymentViewController.h in Headers */,
 				92263DCF1B83AD6B003FE678 /* CardIOCreditCardInfo.h in Headers */,
 				92263DD31B83AD89003FE678 /* CardIOPaymentViewControllerDelegate.h in Headers */,
 				92263DD11B83AD78003FE678 /* CardIOViewDelegate.h in Headers */,
+				B47DF6131E699084002EF735 /* CardIOCameraView.h in Headers */,
+				B47DF6141E6990A2002EF735 /* mz_ios.h in Headers */,
 				4358E6FA1BFBBCCC007E07C3 /* CardIOCardholderNameTextFieldDelegate.h in Headers */,
 				A50A54D41BE30AB300B669FB /* UIImage+ImageEffects.h in Headers */,
 				92263DD01B83AD73003FE678 /* CardIOView.h in Headers */,
@@ -2122,7 +2124,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 92263D751B83ACBB003FE678 /* Build configuration list for PBXNativeTarget "CardIO" */;
 			buildPhases = (
-				929AD77D1B8C771200F6D18E /* Get version from git tag */,
 				92263D6B1B83ACBB003FE678 /* Sources */,
 				92263D6C1B83ACBB003FE678 /* Frameworks */,
 				92263D6D1B83ACBB003FE678 /* Headers */,
@@ -2169,6 +2170,10 @@
 					};
 					92263D6F1B83ACBB003FE678 = {
 						CreatedOnToolsVersion = 7.0;
+						ProvisioningStyle = Manual;
+					};
+					A553B6E51BE32273006DF551 = {
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -2187,7 +2192,8 @@
 				zh_hans,
 				zh_hant,
 			);
-			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
+			mainGroup = 29B97314FDCFA39411CA2CEA;
+			productRefGroup = 19C28FACFE9D520D11CA2CBB /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -2337,20 +2343,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
 			shellScript = "export PATH=/usr/local/bin:$PATH\n\nif [ -f .baler_envx ]; then\n  source .baler_env 2 > /dev/null\nelif which bale > /dev/null; then\n echo \"Using default bale\"\nelse\n  echo \"baler is missing, so skipping the baler step\"\n  exit 0;\nfi\n\necho \"Baling bundle with `which bale`\"\nbale assets/ Classes/ --overwrite-delay 0 -z -c CardIOBundle || (echo 'Failed to generate bundle via baler!' ; exit 1)";
-		};
-		929AD77D1B8C771200F6D18E /* Get version from git tag */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Get version from git tag";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if [ -z \"$ICC_VERSION\" ]\nthen\nICC_VERSION=`git describe --match=iOS_[0-9]*\\.[0-9]* --tags --always --dirty | sed \"s/iOS_//\" | sed \"s/-.*//\"`\nfi\necho \"Using version: $ICC_VERSION\"\n\nsed s/icc-version-undefined/$ICC_VERSION/g <Classes/CardIOIccVersion.h.template >Classes/CardIOIccVersion.h";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -2581,6 +2573,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A50A54BE1BE2FEEC00B669FB /* CardIO_Framework_Debug.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				DEVELOPMENT_TEAM = "";
 			};
 			name = Debug;
 		};
@@ -2588,6 +2582,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A50A54BF1BE2FEEC00B669FB /* CardIO_Framework_Release.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				DEVELOPMENT_TEAM = "";
 			};
 			name = Release;
 		};
@@ -2595,6 +2591,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A50A54BD1BE2FEEC00B669FB /* CardIO_Framework_Adhoc.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				DEVELOPMENT_TEAM = "";
 			};
 			name = AdHoc;
 		};
@@ -2602,6 +2600,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A50A54B41BE2F7A800B669FB /* icc_Debug.xcconfig */;
 			buildSettings = {
+				DEVELOPMENT_TEAM = "";
 			};
 			name = Debug;
 		};
@@ -2609,6 +2608,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A50A54B51BE2F7A800B669FB /* icc_Release.xcconfig */;
 			buildSettings = {
+				DEVELOPMENT_TEAM = "";
 			};
 			name = Release;
 		};
@@ -2616,6 +2616,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A50A54B31BE2F7A800B669FB /* icc_AdHoc.xcconfig */;
 			buildSettings = {
+				DEVELOPMENT_TEAM = "";
 			};
 			name = AdHoc;
 		};

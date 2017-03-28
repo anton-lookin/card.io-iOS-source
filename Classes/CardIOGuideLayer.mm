@@ -18,7 +18,7 @@
 #pragma mark - Colors
 
 #define kStandardMinimumBoundsWidth 300.0f
-#define kStandardLineWidth 12.0f
+#define kStandardLineWidth 6.0f
 #define kStandardCornerSize 50.0f
 #define kAdjustFudge 0.2f  // Because without this, we see a mini gap between edge path and corner path.
 
@@ -386,7 +386,13 @@ typedef enum {
   FrameOrientation       frameOrientation = frameOrientationWithInterfaceOrientation((UIInterfaceOrientation)deviceOrientation);
   UIInterfaceOrientation interfaceOrientation = [UIApplication sharedApplication].statusBarOrientation;
   if (UIInterfaceOrientationIsPortrait(interfaceOrientation)) {
+		CGSize windowSize = [UIApplication sharedApplication].keyWindow.frame.size;
     dmz_rect guideFrame = dmz_guide_frame(frameOrientation, (float)size.width, (float)size.height);
+		if (guideFrame.w > windowSize.width) {
+			guideFrame.x = (size.width - windowSize.width) / 2.0f + kStandardLineWidth / 2.0f + 5.0f;
+			guideFrame.w = windowSize.width - kStandardLineWidth - 10.0f;
+			guideFrame.h = guideFrame.w / 1.586f;
+		}
     return CGRectWithDmzRect(guideFrame);
   }
   else {

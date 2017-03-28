@@ -8,6 +8,7 @@
 #import <UIKit/UIKit.h>
 #import "CardIOGuideLayer.h"
 #import "CardIOVideoStreamDelegate.h"
+#import "CardIOVideoStream.h"
 
 #define kRotationAnimationDuration 0.2f
 
@@ -33,6 +34,7 @@
 // CGRect for the actual camera preview area within the cameraView
 - (CGRect)cameraPreviewFrame;
 
+@property(nonatomic, strong, readwrite) CardIOVideoStream *videoStream;
 @property(nonatomic, strong, readonly)  CardIOCardScanner *scanner;
 @property(nonatomic, weak, readwrite)   id<CardIOVideoStreamDelegate> delegate;
 @property(nonatomic, strong, readwrite) UIFont *instructionsFont;

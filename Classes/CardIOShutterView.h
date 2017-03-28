@@ -8,6 +8,7 @@
 
 @interface CardIOShutterView : UIView
 
+- (id)initWithFrame:(CGRect)aFrame backgroundColor:(UIColor*)backgroundColor;
 - (void)setOpen:(BOOL)shouldBeOpen animated:(BOOL)animated duration:(CFTimeInterval)duration;
 
 @property(nonatomic, assign, readwrite) BOOL open;

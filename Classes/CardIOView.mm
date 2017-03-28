@@ -82,6 +82,7 @@ NSString * const CardIOScanningOrientationAnimationDuration = @"CardIOScanningOr
 
   _config = [[CardIOConfig alloc] init];
   _config.scannedImageDuration = 1.0;
+	self.torchMode = TorchModeOff;
 }
 
 - (CGSize)sizeThatFits:(CGSize)size {
@@ -151,6 +152,7 @@ NSString * const CardIOScanningOrientationAnimationDuration = @"CardIOScanningOr
     self.scanHasBeenStarted = YES;
     
     CardIOLog(@"Creating cameraView");
+		self.config.shutterColor = self.shutterColor;
     self.cameraView = [[CardIOCameraView alloc] initWithFrame:CGRectZeroWithSize(self.frame.size)
                                                      delegate:self
                                                        config:self.config];
@@ -198,6 +200,25 @@ NSString * const CardIOScanningOrientationAnimationDuration = @"CardIOScanningOr
     CardIOLog(@"Stopping CameraViewController session");
     [self.cameraView stopVideoStreamSession];
   }
+}
+
+- (void)setTorchMode:(TorchMode)torchMode {
+	_torchMode = torchMode;
+	switch (torchMode) {
+		case TorchModeOff:
+			self.cameraView.videoStream.autoTorchEnabled = NO;
+			[self.cameraView.videoStream setTorchOn:NO];
+			break;
+		case TorchModeOn:
+			self.cameraView.videoStream.autoTorchEnabled = NO;
+			[self.cameraView.videoStream setTorchOn:YES];
+			break;
+		case TorchModeAuto:
+			[self.cameraView.videoStream setTorchOn:NO];
+			self.cameraView.videoStream.autoTorchEnabled = YES;
+		default:
+			break;
+	}
 }
 
 #pragma mark - CardIOVideoStreamDelegate method and related methods

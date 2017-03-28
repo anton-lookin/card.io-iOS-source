@@ -188,6 +188,7 @@
     _captureSession = [[AVCaptureSession alloc] init];
     _camera = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
     _previewLayer = [AVCaptureVideoPreviewLayer layerWithSession:self.captureSession];
+		_autoTorchEnabled = NO;
     dmz = dmz_context_create();
 #elif SIMULATE_CAMERA
     _previewLayer = [SimulatedCameraLayer layer];
@@ -677,7 +678,7 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
       }
 
       // Auto-torch
-      if (!self.currentlyAdjustingFocus && !didAutoFocus && !self.currentlyAdjustingExposure && [self canSetTorchLevel]) {
+      if (self.autoTorchEnabled && !self.currentlyAdjustingFocus && !didAutoFocus && !self.currentlyAdjustingExposure && [self canSetTorchLevel]) {
         NSTimeInterval now = [[NSDate date] timeIntervalSince1970];
         BOOL changeTorchState = NO;
         BOOL changeTorchStateToOFF = NO;

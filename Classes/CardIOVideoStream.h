@@ -12,7 +12,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import "dmz.h"
 
-#define LOG_FPS 1 // for performance tuning/testing
+#define LOG_FPS 0 // for performance tuning/testing
 
 @class CardIOCardScanner;
 @class CardIOConfig;
@@ -43,6 +43,7 @@
 
 @property(nonatomic, strong, readwrite) CardIOConfig *config;
 @property(nonatomic, assign, readonly) BOOL running;
+@property(nonatomic, assign) BOOL autoTorchEnabled;
 @property(nonatomic, weak, readwrite) UIResponder<CardIOVideoStreamDelegate> *delegate;
 #if SIMULATE_CAMERA
 @property(nonatomic, strong, readonly) CALayer *previewLayer;
