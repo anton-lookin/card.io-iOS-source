@@ -1,0 +1,4 @@
+[submodule "dmz"]
+	path = dmz
+	url = https://github.com/card-io/card.io-dmz.git
+	branch = master
